@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Donacien/AndroidStudioProjects/QuizApp/app/src/main/res/drawable/default_option_border_bg.xml" value="0.4036458333333333" />
         <entry key="..\:/Users/Donacien/AndroidStudioProjects/QuizApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Donacien/AndroidStudioProjects/QuizApp/app/src/main/res/layout/activity_quiz_questions.xml" value="0.33" />
       </map>
     </option>
   </component>
