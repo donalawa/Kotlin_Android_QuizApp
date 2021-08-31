@@ -1,5 +1,6 @@
 package com.example.quizapp
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
@@ -16,10 +17,17 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
     private var mCurrentPosition: Int = 1
     private var mQuestionsList: ArrayList<Question>? = null
     private var mSelectedOptionPosition : Int = 0
+    private var mCorrectAnswers: Int = 0
+//    STORE USER NAME THAT COMES FROM PREV INTENT
+    private var mUserName: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?)  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_questions)
+
+//        Set user name from intent since onCreate comes with intent info
+        mUserName = intent.getStringExtra(Constants.USER_NAME)
+
 
         mQuestionsList = Constants.getQuestions()
 //        Log.i("Questions Size","${questionsList.size}")
@@ -103,12 +111,21 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                             setQuestion()
                         }else -> {
                             Toast.makeText(this,"You have successfully completed the quiz",Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this,ResultActivity::class.java)
+                            intent.putExtra(Constants.USER_NAME, mUserName)
+                            intent.putExtra(Constants.CORRECT_ANSWERS, mCorrectAnswers)
+                            intent.putExtra(Constants.TOTAL_QUESTIONS, mQuestionsList!!.size)
+                            startActivity(intent)
+                            finish()
                         }
                     }
                 }else {
                     val question = mQuestionsList?.get(mCurrentPosition - 1)
                     if(question!!.correctAnswer != mSelectedOptionPosition) {
                         answerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
+                    }else {
+//                        IF WE WHERE NOT INCORRECT THEN WE WANT TO INCREASE THE CORRECT ANSWER BY ONE
+                        mCorrectAnswers += 1
                     }
 //                    We highlight the correct answer either ways
                     answerView(question.correctAnswer, R.drawable.correct_option_border_bg)

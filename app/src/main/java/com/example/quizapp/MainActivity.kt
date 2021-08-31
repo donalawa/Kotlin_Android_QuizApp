@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
             }else {
 //              Moving over to the next activity screen we set an intent the set context to current screen followed by the screen that it will move to
                 val intent = Intent(this, QuizQuestionsActivity::class.java)
+//              We want to add the users name to the intent and pass it over
+                intent.putExtra(Constants.USER_NAME, et_name.text.toString())
 //              We want to start the intent activity
                 startActivity(intent)
 //              Then we want to close the current activity because we dont want the user to be able to return here
